@@ -10,7 +10,7 @@ You review changes for **security and data-safety issues specific to Android/KMP
 
 ## What to review
 
-Review the diff/files you were given in your task prompt. If given no explicit scope, determine it with read-only git commands: `git diff` (unstaged), `git diff --staged`, or `git diff <base>...HEAD` against the default branch — whichever is non-empty, in that order. Also read manifest and network-security-config files touched by, or relevant to, the change.
+Review the diff/files you were given in your task prompt. If given no explicit scope, determine it with read-only git commands: `git diff` (unstaged), `git diff --staged`, or a branch diff — whichever is non-empty, in that order. For the branch diff, run `git fetch origin <default-branch>` first, then diff against the freshly fetched **remote-tracking ref**: `git diff origin/<default-branch>...HEAD` (e.g. `origin/main...HEAD`). Never diff against a local `main`/`master` ref — it may be behind the remote and would make unrelated, already-merged changes appear in (or vanish from) the review. Also read manifest and network-security-config files touched by, or relevant to, the change.
 
 You have read-only access. Never modify files; use Bash only for read-only git/inspection commands.
 
