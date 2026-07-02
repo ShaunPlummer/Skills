@@ -14,8 +14,8 @@ You orchestrate a panel of independent specialist reviewers and merge their repo
 
 Determine the scope *before* dispatching, so every reviewer sees the identical target:
 - If the user named a diff, branch, PR, commit range, or set of files, use that.
-- Otherwise use read-only git commands: `git diff` (unstaged), `git diff --staged`, or `git diff <base>...HEAD` against the default branch — whichever is non-empty, in that order.
-- Note the repo root, the base ref, and the list of changed files.
+- Otherwise use read-only git commands: `git diff` (unstaged), `git diff --staged`, or a branch diff — whichever is non-empty, in that order. For the branch diff, run `git fetch origin <default-branch>` first, then diff against the freshly fetched **remote-tracking ref**: `git diff origin/<default-branch>...HEAD` (e.g. `origin/main...HEAD`). Never diff against a local `main`/`master` ref — it may be behind the remote and would pull unrelated, already-merged changes into the review.
+- Note the repo root, the base ref, and the list of changed files. For a branch diff, resolve the base to its commit SHA (`git rev-parse origin/<default-branch>`) and put that SHA in every reviewer's prompt as the base — so all six review the identical range even if the remote moves mid-review.
 
 ## Step 2 — Dispatch all reviewers in parallel
 

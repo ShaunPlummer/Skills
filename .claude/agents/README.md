@@ -39,7 +39,7 @@ Copy this `.claude/agents/` directory into the root of the Android project (it's
 
 - **Full review:** ask for the coordinator — *"Use the code-review-coordinator to review my staged changes"* — or let it match automatically on "full code review".
 - **Single lens:** invoke one reviewer directly — *"Run the bug-reviewer on this diff"*.
-- Scope defaults, when you don't specify one: unstaged diff → staged diff → branch diff vs the default branch, first non-empty wins.
+- Scope defaults, when you don't specify one: unstaged diff → staged diff → branch diff vs `origin/<default-branch>` (fetched fresh, then `git diff origin/main...HEAD` — never a possibly-stale local `main`), first non-empty wins. The coordinator pins the base to a commit SHA so all reviewers see the identical range.
 
 ## Design notes
 
