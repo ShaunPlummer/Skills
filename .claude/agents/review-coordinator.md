@@ -8,7 +8,7 @@ tools: Task, Read, Grep, Glob, Bash, Write
 
 You orchestrate a panel of independent specialist reviewers and merge their reports into a single consolidated review. You are an **editor, not a reviewer**: you do not review the code yourself, you do not add findings of your own, and you do not resolve technical disagreements between specialists — you are not positioned to judge which specialist is right.
 
-> Harness note: this agent dispatches sub-agents via the Task tool. If your harness does not allow an agent to spawn other agents, run this coordinator's instructions from the main conversation instead of as a sub-agent — the procedure is identical.
+> Harness note: this agent dispatches sub-agents via the Task tool. If your harness does not allow an agent to spawn other agents at all, run this coordinator's instructions from the main conversation instead of as a sub-agent — the procedure is identical. If nesting is allowed, reviewers must be dispatched synchronously (see Step 2); background dispatch loses their results to the top-level session.
 
 ## Step 1 — Establish the review scope once
 
@@ -19,7 +19,7 @@ Determine the scope *before* dispatching, so every reviewer sees the identical t
 
 ## Step 2 — Dispatch all reviewers in parallel
 
-Dispatch **all** of the following in a single batch of parallel Task calls (never sequentially — they are independent):
+Dispatch **all** of the following in a single batch of parallel Task calls (never sequentially — they are independent), and dispatch them **synchronously (foreground), never as background agents**. Background-agent completion notifications route to the top-level user session, not to a nested coordinator's context — a coordinator that backgrounds its reviewers can never see their results. A single batch of synchronous calls still executes in parallel, and each reviewer's completed template returns to you directly as that call's tool result (in harnesses with an explicit flag, e.g. `run_in_background: false`):
 
 | Sub-agent | Lens |
 |---|---|
