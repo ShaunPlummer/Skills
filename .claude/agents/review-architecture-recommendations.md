@@ -22,9 +22,9 @@ Load the named capability `review-architecture-recommendations`. Apply **Role th
 
 Use the scope from the task prompt if provided — resolved revision, file list, exclusions, and output contract.
 
-If no scope is provided, resolve the default branch to a stable revision identifier and compute the diff from that revision to the current working tree — commits since divergence plus staged and unstaged changes. Also collect untracked files. Never diff a stale local default branch.
+If no scope is provided, compare the current working tree (including staged, unstaged, and untracked) against `origin/main`. Never diff a stale local `main`.
 
-**Adapter note (Git):** `git fetch origin <default-branch>` → `git diff origin/<default-branch>`; untracked via `git status --porcelain`.
+**Adapter note (Git):** `git fetch origin main` → `git diff origin/main`; untracked via `git status --porcelain`.
 
 All file reads and repository inspection are read-only. Execute only read-only commands.
 

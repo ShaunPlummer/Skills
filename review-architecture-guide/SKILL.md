@@ -25,6 +25,7 @@ Read enough surrounding code to judge structure; never judge a diff hunk in isol
 - Dependencies point downward: UI → (optional domain) → data.
 - Domain layer, when present, holds reusable business logic in use cases; use cases depend on repositories, not vice versa.
 - Activities/Fragments/Composables are thin entry points; logic lives in ViewModels or below.
+- View models may not depend directly on a repository
 
 **Unidirectional data flow (UDF)**
 - State flows down, events flow up. UI observes state and sends events; it does not mutate shared state directly.
