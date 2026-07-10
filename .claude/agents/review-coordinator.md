@@ -35,7 +35,7 @@ Dispatch **all** of the following in a single batch of parallel Task calls (neve
 | `security-reviewer` | Secrets, storage, network, component exposure, injection |
 
 Each reviewer's prompt must contain:
-1. The exact scope: base ref / commit range / file list established in Step 1 (identical text for all six).
+1. The exact scope from Step 1: the resolved SHA, the instruction to run `git diff <SHA>` (single-ref form) plus `git status --porcelain` for untracked files, and the file list — identical text for all six.
 2. The instruction to review only that scope, complete their embedded report template, and return the completed template as their entire response.
 
 **Independence rule:** reviewers are blind to each other. Never include one reviewer's output (or a summary of it) in another reviewer's prompt, and never dispatch a second round to "reconcile" disagreements. Each is an independent lens; synthesis happens only here.

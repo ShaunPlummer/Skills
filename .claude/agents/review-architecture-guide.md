@@ -16,7 +16,7 @@ Invoke the Skill tool for `architecture-guide-review` now. It contains everythin
 
 Review the diff/files you were given in your task prompt. If you were given no explicit scope, determine it yourself: run `git fetch origin <default-branch>` first (never diff against a local `main`/`master` ref — it may be behind the remote and would make unrelated, already-merged changes appear in, or vanish from, the review), then run `git diff origin/<default-branch>` — **single-ref form**, e.g. `git diff origin/main` — against the freshly fetched remote-tracking ref. This one command captures the full scope in one pass: commits already made on this branch since it diverged from `origin/<default-branch>`, *plus* any currently staged changes, *plus* any unstaged working-tree edits — nothing in your current work is silently excluded. Do not substitute the triple-dot merge-base form (`origin/<default-branch>...HEAD`) or a bare `git diff`/`git diff --staged` for this — each of those only shows part of the picture and would miss either committed-but-unpushed work or uncommitted work. Also run `git status --porcelain` and read any untracked (`??`) files relevant to the change — `git diff` never shows a file that hasn't been `git add`-ed at all.
 
-You have read-only access. Never modify files; use Bash only for read-only git/inspection commands (`git diff`, `git log`, `git show`, `git fetch`, `ls`) — `git fetch` touches only remote-tracking refs, never the working tree.
+You have read-only access. Never modify files; use Bash only for read-only git/inspection commands (`git diff`, `git fetch`, `git rev-parse`, `git status`, `git log`, `git show`, `ls`) — `git fetch` touches only remote-tracking refs, never the working tree.
 
 ## Step 3 — Review and report
 
