@@ -24,10 +24,10 @@ Bug correctness and security are outside the scope of this panel. After the revi
 ## Step 1 — Resolve scope
 
 - User-named revision range or file list takes precedence.
-- Otherwise, resolve the default branch to a stable revision identifier (SHA) and compute the diff from that revision to the current working tree — commits since divergence plus staged and unstaged changes. Also collect untracked files.
+- Otherwise, compare the current working tree (including staged, unstaged, and untracked) against `origin/main`.
 - Pass the **same resolved revision, file scope, exclusions, and output contract** to every reviewer.
 
-**Adapter note (Git):** `git fetch origin <default-branch>` → `git rev-parse origin/<default-branch>` → SHA; diff as `git diff <SHA>`; untracked via `git status --porcelain`.
+**Adapter note (Git):** `git fetch origin main` → `git rev-parse origin/main` → SHA; diff as `git diff <SHA>`; untracked via `git status --porcelain`.
 
 ## Step 2 — Dispatch reviewers
 
@@ -53,7 +53,7 @@ Normalize, deduplicate, and cross-reference findings. Do not create new findings
 ```markdown
 # Consolidated Code Review
 
-**Scope:** <resolved revision> vs working tree, <file count> files
+**Scope:** origin/main vs working tree (including uncommitted), <file count> files
 **Reviewers:** 4 lenses — <list any failures>
 **Out of scope:** bug correctness and security (run a dedicated review separately)
 
