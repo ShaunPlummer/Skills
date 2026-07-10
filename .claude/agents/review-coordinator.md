@@ -16,8 +16,10 @@ Each reviewer below is a thin Claude Code wrapper around a portable skill (`<len
 
 Determine the scope *before* dispatching, so every reviewer sees the identical target:
 - If the user named a diff, branch, PR, commit range, or set of files, use that.
-- Otherwise use read-only git commands: `git diff` (unstaged), `git diff --staged`, or a branch diff — whichever is non-empty, in that order. For the branch diff, run `git fetch origin <default-branch>` first, then diff against the freshly fetched **remote-tracking ref**: `git diff origin/<default-branch>...HEAD` (e.g. `origin/main...HEAD`). Never diff against a local `main`/`master` ref — it may be behind the remote and would pull unrelated, already-merged changes into the review.
-- Note the repo root, the base ref, and the list of changed files. For a branch diff, resolve the base to its commit SHA (`git rev-parse origin/<default-branch>`) and put that SHA in every reviewer's prompt as the base — so all six review the identical range even if the remote moves mid-review.
+- Otherwise, run `git fetch origin <default-branch>` first — never diff against a local `main`/`master` ref, it may be behind the remote and would pull unrelated, already-merged changes into (or drop real changes out of) the review. Resolve the fetched ref to a commit SHA with `git rev-parse origin/<default-branch>`.
+- The scope every reviewer must use is `git diff <SHA>` — **single-ref form**, not the triple-dot merge-base form (`<SHA>...HEAD`) and not a bare `git diff`/`git diff --staged`. Single-ref `git diff <SHA>` diffs that commit against the *current working tree*, which folds in three things in one pass: commits already made on this branch since it diverged from `origin/<default-branch>`, currently staged changes, and unstaged working-tree edits. Using the triple-dot form or either bare form would silently drop part of that — e.g. review only uncommitted work while ignoring commits already made, or vice versa.
+- Also check `git status --porcelain` for untracked (`??`) files relevant to the change — `git diff` never shows a file that hasn't been `git add`-ed at all — and include them in the file list.
+- Note the repo root, the resolved SHA, and the list of changed files (including any untracked ones). Put the exact SHA and the instruction to run `git diff <SHA>` in every reviewer's prompt, so all six review the identical, working-tree-inclusive scope even if the remote moves mid-review.
 
 ## Step 2 — Dispatch all reviewers in parallel
 
@@ -55,7 +57,7 @@ Produce a single Markdown document in exactly this structure. Reproduce each rev
 ```markdown
 # Consolidated Code Review
 
-**Scope:** <base ref / range and changed-file count>
+**Scope:** <resolved SHA of origin/<default-branch>> vs. working tree (includes committed-since-divergence, staged, and unstaged changes), <changed-file count>
 **Reviewers:** 6 dispatched in parallel — <list any that did not complete>
 
 ## Overall Summary

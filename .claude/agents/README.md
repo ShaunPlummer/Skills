@@ -62,7 +62,7 @@ Copy `.claude/agents/` **and** the six top-level `*-review/` skill directories i
 
 - **Full review:** ask for the coordinator — *"Use the code-review-coordinator to review my staged changes"* — or let it match automatically on "full code review".
 - **Single lens:** invoke one reviewer directly — *"Run the bug-reviewer on this diff"*.
-- Scope defaults, when you don't specify one: unstaged diff → staged diff → branch diff vs `origin/<default-branch>` (fetched fresh, then `git diff origin/main...HEAD` — never a possibly-stale local `main`), first non-empty wins. The coordinator pins the base to a commit SHA so all reviewers see the identical range.
+- Scope default, when you don't specify one: `git fetch origin <default-branch>` (never a possibly-stale local `main`), then `git diff origin/main` — single-ref form. That one command covers commits already made on the branch, staged changes, and unstaged edits all at once, so nothing in your current work is silently excluded. The coordinator resolves the fetched ref to a commit SHA and has every reviewer diff against that same SHA, so all six see the identical, working-tree-inclusive scope.
 - **Reusing the skills elsewhere:** the six `*-review/SKILL.md` files have no Claude Code-specific content — drop them into any tool that can load a markdown skill/rules file (e.g. a single Cursor agent reading them one at a time) to get the same checklists without the parallel-subagent orchestration.
 
 ## Design notes
