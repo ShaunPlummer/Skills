@@ -2,10 +2,11 @@
 name: android-code-review
 description: >-
   Orchestrates a multi-angle Android/Kotlin Multiplatform code review for Cursor.
-  Dispatches review-architecture-guide, review-architecture-recommendations,
-  review-test-coverage, and review-kotlin-coroutines as read-only subagents, plus
-  built-in Bugbot and Security Review. Synthesizes one consolidated Markdown report.
-  Use for full code review, pre-merge review, or multi-perspective review of local changes.
+  Dispatches architecture-guide-reviewer, architecture-recommendations-reviewer,
+  test-coverage-reviewer, and kotlin-coroutines-reviewer as read-only subagents,
+  plus built-in Bugbot and Security Review. Synthesizes one consolidated Markdown
+  report. Use for full code review, pre-merge review, or multi-perspective review
+  of local changes.
 metadata:
   version: "1.1"
 ---
@@ -19,8 +20,7 @@ You are an **editor, not a reviewer**: orchestrate specialists and merge reports
 ## Step 1 — Establish scope once
 
 - User-named diff mode / range / files win.
-- Default: **`branch changes`** (merge-base with default branch; committed + staged + unstaged).
-- **`uncommitted changes`** only when the user asks for dirty/local-only review.
+- Default: working tree including uncommitted changes (staged, unstaged, untracked) compared against **`origin/main`**.
 
 Record absolute repo path and diff mode. Do not pre-compute the diff for Bugbot/Security Review.
 
@@ -32,10 +32,10 @@ One batch of Task calls, all `readonly: true`, all `run_in_background: false`.
 
 | Reviewer | Type | Loads |
 |---|---|---|
-| Architecture Guide | `generalPurpose` | `review-architecture-guide` skill (checklist sections only) |
-| Architecture Recommendations | `generalPurpose` | `review-architecture-recommendations` |
-| Test Coverage | `generalPurpose` | `review-test-coverage` |
-| Kotlin & Coroutines | `generalPurpose` | `review-kotlin-coroutines` |
+| Architecture Guide | `architecture-guide-reviewer` | `review-architecture-guide` skill (Role through Output) |
+| Architecture Recommendations | `architecture-recommendations-reviewer` | `review-architecture-recommendations` |
+| Test Coverage | `test-coverage-reviewer` | `review-test-coverage` |
+| Kotlin & Coroutines | `kotlin-coroutines-reviewer` | `review-kotlin-coroutines` |
 | Bugbot | `bugbot` | `review-bugbot` skill |
 | Security Review | `security-review` | `review-security` skill |
 
@@ -43,17 +43,17 @@ One batch of Task calls, all `readonly: true`, all `run_in_background: false`.
 
 ```text
 Full Repository Path: <absolute repository path>
-Diff: <branch changes | uncommitted changes>
-Base Branch: <only if non-default base>
+Diff: working tree including uncommitted changes vs origin/main
+Base Branch: origin/main
 
 Read ~/.cursor/skills/<review-*-name>/SKILL.md.
-Follow Role through Output.
+Follow Role through Output. Ignore the "Cursor (single-lens)" section.
 Return only the completed report template.
 ```
 
 ### Built-ins
 
-Follow `review-bugbot` and `review-security` with the same repo path and diff mode. Collect findings for the consolidated report (do not stop at their one-line summaries).
+Follow `review-bugbot` and `review-security` with the same repo path and diff mode (`working tree including uncommitted changes vs origin/main`). Collect findings for the consolidated report (do not stop at their one-line summaries).
 
 **Independence:** never feed one reviewer's output into another. Retry once on failure; then "Reviewer did not complete".
 
