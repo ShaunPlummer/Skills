@@ -16,7 +16,7 @@ Thin wrapper. All review criteria and the output template live in the `review-ar
 
 ## Step 1 — Load the capability
 
-Load the named capability `review-architecture-guide`. Apply **Role through Output**.
+Load the named capability `review-architecture-guide`: try the Skill tool first; if it reports the skill unknown/unavailable in this execution context, Read the file directly instead — check `~/.claude/skills/review-architecture-guide/SKILL.md` (the documented global install location) first, then `review-architecture-guide/SKILL.md` at the repo root (when working directly in the source archive repo rather than an installed copy). Either way, apply **Role through Output** from that file.
 
 ## Step 2 — Determine scope
 

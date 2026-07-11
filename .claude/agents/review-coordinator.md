@@ -10,6 +10,8 @@ You are an **editor, not a reviewer**. Dispatch specialists, merge templates, su
 
 Reusable review criteria live in named capabilities (`review-*`) that each reviewer loads independently.
 
+**Adapter note (Claude Code):** if your harness does not allow an agent to spawn other agents at all, run this coordinator's instructions from the main conversation instead of as a sub-agent — the procedure is identical, just executed one level up.
+
 ## Capabilities required
 
 - Read files and inspect repository state (read-only)
@@ -20,6 +22,8 @@ Reusable review criteria live in named capabilities (`review-*`) that each revie
 ## Bugs and security
 
 Bug correctness and security are outside the scope of this panel. After the review completes, direct the user to run a dedicated bug and security review using whatever capability is available in the active environment.
+
+**Adapter note (Claude Code):** the built-in `/code-review` skill covers correctness bugs, and the built-in `security-review` skill covers security — tell the user to run those, don't build custom bug/security lenses into this panel.
 
 ## Step 1 — Resolve scope
 
@@ -33,12 +37,16 @@ Bug correctness and security are outside the scope of this panel. After the revi
 
 Dispatch all reviewers in parallel where supported; execute them sequentially if parallel dispatch is unavailable. Collect every reviewer result before synthesis.
 
-| Role | Loads capability |
-|---|---|
-| architecture guide reviewer | `review-architecture-guide` |
-| architecture recommendations reviewer | `review-architecture-recommendations` |
-| test coverage reviewer | `review-test-coverage` |
-| kotlin coroutines reviewer | `review-kotlin-coroutines` |
+**Adapter note (Claude Code):** dispatch all four in one batch of *synchronous* (foreground) Task calls, never as background agents. Background-agent completion notifications route to the top-level user session, not to a nested coordinator's own context — a coordinator that backgrounds its reviewers can never see their results. A single batch of synchronous calls still executes in parallel, and each reviewer's completed template returns directly as that call's tool result.
+
+| Role | Loads capability | Subagent to dispatch (Claude Code) |
+|---|---|---|
+| architecture guide reviewer | `review-architecture-guide` | `architecture-guide-reviewer` |
+| architecture recommendations reviewer | `review-architecture-recommendations` | `architecture-recommendations-reviewer` |
+| test coverage reviewer | `review-test-coverage` | `test-coverage-reviewer` |
+| kotlin coroutines reviewer | `review-kotlin-coroutines` | `kotlin-coroutines-reviewer` |
+
+**Adapter note (Claude Code):** dispatch each row via the Task tool using the exact subagent name in the third column — the "Role"/"Loads capability" columns describe the reviewer generically, but the Task tool needs the literal registered subagent name to dispatch correctly.
 
 All reviewers receive identical scope. Each reviewer is blind to the others. On failure: retry once, record the role as failed, and continue — do not invent findings.
 
