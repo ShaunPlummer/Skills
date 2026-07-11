@@ -36,11 +36,11 @@ review-*/                      # agent-agnostic checklists (Claude Skill tool)
 
 ## Install
 
-This repo is an archive copy — not live via symlink.
+This repo is an archive copy — not live via symlink, and never run in place. Skills are always copied out to a real skills directory before use, either a target project's own `.claude/skills/` (project-scoped, checked into that project's version control) or the user-level `~/.claude/skills/` (global, available across all projects). Pick whichever matches how you want the review lenses shared.
 
-**Cursor:** copy each folder under `.cursor/skills/` into `~/.cursor/skills/` (overwrites same-named skills). Those folders are self-contained; do not copy root `review-*/` into `~/.cursor/skills/` or you will lose the Cursor launch section.
+**Cursor:** copy each folder under `.cursor/skills/` into the project's `.cursor/skills/` or the user-level `~/.cursor/skills/` (overwrites same-named skills). Those folders are self-contained; do not copy root `review-*/` into either location or you will lose the Cursor launch section.
 
-**Claude Code:** copy root `review-*/` into `~/.claude/skills/`, and `.claude/agents/*.md` into `~/.claude/agents/`.
+**Claude Code:** copy root `review-*/` into the project's `.claude/skills/` or the user-level `~/.claude/skills/`, and `.claude/agents/*.md` into the corresponding `.claude/agents/` (project-level or `~/.claude/agents/`).
 
 ## Usage
 
