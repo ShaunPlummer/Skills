@@ -52,17 +52,17 @@ The solution to the problem, from the user's perspective.
 
 ## Assumptions
 
-A list of assumptions being made.
+A numbered list of assumptions being made.
 
 ## Open Questions
 
 ### Blocking
 
-Questions that must be resolved before the design can be approved.
+A numbered list of questions that must be resolved before the design can be approved.
 
 ### Non-blocking
 
-Questions that can be resolved during planning or implementation without changing the agreed behavior.
+A numbered list of questions that can be resolved during planning or implementation without changing the agreed behavior.
 
 ## User Stories
 
