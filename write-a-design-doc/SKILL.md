@@ -80,15 +80,15 @@ This list of user stories should focus on the core high-value stories. Stories a
 
 ## Story Details
 
-### <Story Number> - <Scenario Name>
+### Story: <Story Number> - <Scenario Name>
 
 A numbered list of any relevant acceptance criteria for the story, written in a BDD (Given, When, Then) format.
 
-#### <Story Number>.<Acceptance Criteria Number>
+#### AC: <Story Number>.<Acceptance Criteria Number>
 
 <story-details-example>
 
-### 1 - App Launch
+### Story: 1 - App Launch
 
 #### AC 1.1
 
