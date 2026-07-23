@@ -31,6 +31,16 @@ Break a provided TDD into a phased implementation plan using vertical slices (tr
 - Keep phases small enough to integrate, review, and receive feedback quickly.
 - A story may span multiple phases, with each phase delivering a distinct subset of its acceptance criteria.
 
+### Just-in-time introduction (no forward scaffolding)
+
+Do **not** add types, enum entries, config keys, DI wiring, fixtures, or mock updates in an early “foundations” phase merely because a later phase will need them.
+
+- Introduce new symbols in the first phase whose acceptance criteria or Verification require it.
+- If a phase only needs a subset (e.g. DTO fields for deserialize), do not add unused domain models, repository APIs, endpoint/feature enums, or mock config properties “for later”.
+- Put deferred symbols in that phase’s **Phase out of scope** / Implementation Details deferred list by name (e.g. “`EndpointType.REGISTER_REALTIME` — Phase 3”).
+- Enabling work is allowed only when **this phase’s** ACs cannot be verified without it (e.g. case-insensitive config lookup can be tested with **existing** endpoint/feature ids; do not invent new enum values until a phase resolves those ids).
+- Prefer verifying behaviour with the smallest surface: DTO-only → domain when mapped → repository when saved → config keys when the network/API path reads them.
+
 ### Risk and Enabling Work
 
 - Prioritise phases that reduce the greatest risk or uncertainty.
@@ -48,6 +58,9 @@ Break a provided TDD into a phased implementation plan using vertical slices (tr
 - Do not include items identified as out of scope.
 - Follow the design’s technical decisions. If repository evidence suggests a decision should change, identify the conflict and return it for review rather than silently changing it.
 
+## Phase implementation
+- Never leave code comments mentioning the phases
+
 <plan-template>
 # Implementation Plan: <Feature/TDD Name>
 
@@ -64,11 +77,11 @@ The solution to the problem, from the user's perspective.
 
 A description of the scope and outcome for the phase.
 
-### <Story Number> - <Scenario Name>
+### Story: <Story Number> - <Scenario Name>
 
 A numbered list of any relevant acceptance criteria for the story, written in a BDD (Given, When, Then) format.
 
-#### <Story Number>.<Acceptance Criteria Number>
+#### AC: <Story Number>.<Acceptance Criteria Number>
 
 ### Implementation Details
 
