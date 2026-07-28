@@ -1,19 +1,27 @@
 ---
 name: write-a-prd
-description: Create a Product Requirements Document (PRD) for a mobile application or SDK feature through structured stakeholder interviews. Use when creating a new feature, modifying existing behaviour, writing user stories, or documenting product requirements. Focus on WHAT and WHY, not HOW. If a repository is available, inspect it first to understand the existing behaviour before writing the PRD.
+description: Create a Product Requirements Document (PRD) for a mobile application or SDK feature through structured stakeholder interviews. Use when creating a new feature, modifying existing behaviour, writing user stories, or documenting product requirements. Focus on WHAT and WHY, not HOW. Use the domain language and existing screens in this skill as product context.
+metadata:
+  author: Shaun Plummer
+  version: "0.1.0"
 ---
 
 # Process
 
-1. Understand the existing behaviour.
-   * Inspect the repository if available.
-   * Ask the user to connect one if the current behaviour cannot be verified.
-2. Interview the stakeholder until the feature is fully understood.
-   * Focus on observable behaviour.
+1. Interview the stakeholder until the feature is fully understood.
    * Walk through the user journey screen by screen.
+   * Map navigation triggers, destinations, and back/exit state behavior for every user action.
+   * Focus on observable behaviour.
    * Challenge assumptions and identify missing requirements.
+2. Cross-check answers against Domain Language and Existing Screens. Flag conflicts with documented product behaviour. When current behaviour is unclear, ask the stakeholder what happens today — do not invent it.
 3. Write the PRD using the template below.
-4. Save the PRD as a Markdown file.
+4. Share the PRD as downloadable Markdown file.
+
+## Product Context
+
+Waymap is an accessible indoor and outdoor pedestrian navigation product for sighted and visually impaired users. Coverage is organised as Deployments containing Clusters of Maps. Journeys are made of Outdoor, Indoor, Transit, and Unmapped legs. Positioning uses GPS outdoors, Smart Step indoors, and VPS to visually relocate. Guidance is visual and spoken (TTS); spoken and on-screen content should stay aligned unless the PRD says otherwise.
+
+Assume no repository access. Treat Domain Language and Existing Screens as the product model. When the stakeholder implies existing behaviour that is not documented here, ask what happens today rather than inferring.
 
 ## Domain Language
 
@@ -26,19 +34,22 @@ Use these terms consistently throughout the interview and PRD. Prefer them over 
 | **Deployment** | A geographic coverage area (for example, a city or region) containing a catalogue of maps. | Zone *(except in UI)* |
 | **Cluster** | A logical grouping of related maps within a deployment. | — |
 | **Map** | Downloadable map data representing a navigable area. Prefer **Map** over *Venue* or *Building*. | Venue, Building |
+| **Text to speech (TTS)** | A mechanism to announce instructions using a voice synthesiser. | — |
 
-### Journey Types
+### Journey Leg Types
 
-- **Outdoor Walk** — A walk outside a mapped area but within a deployment. Uses GPS positioning.
-- **Indoor Walk** — A walk within a mapped area.
-- **Transit Leg** — A journey leg using public transport.
-- **Unmapped Leg** — A journey leg through an indoor area not covered by Waymap mapping.
+- **Outdoor** — A walk outside a mapped area but within a deployment. Uses GPS positioning.
+- **Indoor** — A walk within a mapped area.
+- **Transit** — A journey leg using public transport.
+- **Unmapped** — A journey leg through an indoor area not covered by Waymap mapping.
 
 ### User Types
 
 - **Sighted User**
 - **Visually Impaired User**
 - **Tester**
+
+Developer actors are only appropriate for SDK features.
 
 ### Existing Products
 
@@ -50,6 +61,9 @@ Use these terms consistently throughout the interview and PRD. Prefer them over 
 | Name | Description |
 |------|-------------|
 | **Map Catalogue** | The authoritative source of deployments, clusters and maps. |
+| **Map** | A single area for which a detailed map has been created. |
+| **Deployment Index** | A summary of searchable destinations within a deployment |
+| **Search** | Users can search the deployment, internally this uses the deployment index |
 
 ### Guidance
 
@@ -73,12 +87,16 @@ Prefer extending existing screens over introducing new ones.
 | **Map HUD** | Live navigation guidance including orientation, instructions, transit information and arrival. |
 | **Journey Feedback** | Rate and provide feedback on a completed journey. |
 
+Typical flow: Search Home → Location Detail → Journey Planner → Journey Summary → Map HUD → Journey Feedback. Leg Detail is a side path from Journey Summary or Map HUD.
+
 ### Screen Guidance
 
 - Identify which screen(s) are affected by the proposed behaviour.
 - Walk through the user's journey screen by screen.
+- Explicitly document screen modification, layout states, and navigation transitions.
 - Consider the different states of each affected screen, such as loading, empty, error, offline and permission denied.
 - If a new screen is required, explain why an existing screen is insufficient.
+- For SDK features, treat public interfaces/listeners as "screens." Document callback triggers, initial/pending states, error handling, and parameter validation.
 
 ## Interview Guidance
 
@@ -125,16 +143,6 @@ Consider different states:
 * Offline
 * Permission denied
 
-## User Types
-
-Common actors include:
-
-* Sighted user
-* Visually impaired user
-* Tester
-
-Developer actors are only appropriate for SDK features.
-
 ## Technical Guidance
 
 Ground advice in what is technically achievable.
@@ -153,7 +161,6 @@ Include:
 * Acceptance criteria
 * Edge cases
 * Out of scope
-* Success criteria
 * Further notes
 
 Never include:
@@ -189,7 +196,7 @@ Describe the proposed behaviour from the user's perspective.
 
 <acceptance-criteria-example>
 
-### 1 — Pause Navigation
+### Story 1 — Pause Navigation
 
 #### AC 1.1
 
@@ -207,9 +214,10 @@ Then guidance stops until navigation is resumed.
 |---|---|:-:|---|
 |Offline|Network unavailable|✓|Continue using cached data.|
 
-# Success Criteria
-
-Describe how the team will know the feature solved the problem.
+# Open Questions & Pending Decisions
+| Item | Impacted Component | Stakeholder Action Needed | Target Resolution Date |
+| :--- | :--- | :--- | :--- |
+| Confirm max TTS announcements | Map HUD | Check with Accessibility Team | YYYY-MM-DD |
 
 # Out of Scope
 
