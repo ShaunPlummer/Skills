@@ -1,5 +1,5 @@
 ---
-name: write-a-design-doc
+name: write-design-doc
 description: Using the repository context, create a Technical Design Document for a proposed feature or engineering change. Use when the user asks to write a design doc, technical specification, implementation design, or architecture plan from requirements or conversation context. Ground the design in the current state of the codebase. Inspect the codebase before proposing changes, identify ambiguities and constraints, document user stories, BDD acceptance criteria, implementation decisions, testing strategy, exclusions, and unresolved questions, then save the result as Markdown under .tdd/.
 metadata:
   author: Shaun Plummer

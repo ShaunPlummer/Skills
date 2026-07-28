@@ -1,5 +1,5 @@
 ---
-name: tdd-to-plan
+name: design-doc-to-plan
 description: Use when converting an approved technical design document, PRD, specification, or architecture proposal into a phased implementation plan. Saved as a local Markdown file in ./.plans/.
 metadata:
   author: Shaun Plummer

@@ -1,5 +1,5 @@
 ---
-name: write-a-test-scope-dsl
+name: write-test-scope-dsl
 description: Designs and implements Kotlin test scope DSL to use when creating or updating unit tests. All unit tests should make use of a test scope to contain unit test helpers that group setup, dependencies, and assertion functions for ViewModels, use cases, and other classes under test.
 version: 1.0.0
 projectTypes: [android, kotlin]
