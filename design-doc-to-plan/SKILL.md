@@ -1,24 +1,21 @@
 ---
-name: tdd-to-plan
-description: Use when converting an approved technical design document, PRD, specification, or architecture proposal into a phased implementation plan. Saved as a local Markdown file in ./.plans/.
-metadata:
-  author: Shaun Plummer
-  version: "0.1.0"
+name: design-doc-to-plan
+description: Converts an approved technical design document, PRD, specification, or architecture proposal into a phased implementation plan saved under ./.plans/. Use when turning a design doc or TDD into an implementation plan, vertical slices, or tracer-bullet phases.
 ---
 
-# TDD to Plan
+# Design Doc to Plan
 
-Break a provided TDD into a phased implementation plan using vertical slices (tracer bullets). Output is a Markdown file in `./.plans/`.
+Break a provided design document (TDD) into a phased implementation plan using vertical slices (tracer bullets). Output is a Markdown file in `./.plans/`.
 
 ## Process
 
-1. The TDD should already be in the conversation. If it isn't, ask the user to share it.
+1. The design document should already be in the conversation. If it isn't, ask the user to share it.
 2. Ground the plan in the current codebase. Treat the implementation as the source of truth; verify relevant architecture and clearly label assumptions.
 3. Identify key architecture decisions on which the solution is being built.
 4. Ask questions about unresolved decisions or ambiguities that prevent the template from being completed or affect the proposed plan.
 5. Draft a series of vertical slices matching the provided rules.
 6. Once you have a complete understanding of the problem and solution, use the template below to write the plan to a file. Create the `<repo-root>/.plans/` directory if it doesn't exist. Write the plan as a Markdown file named after the feature. If you know the task ID, use it to prefix the file name (e.g., `<repo-root>/.plans/33050-user-onboarding.md`).
-7. Compare the newly created plan against the original TDD to confirm no requirements or design decisions are missing.
+7. Compare the newly created plan against the original design document to confirm no requirements or design decisions are missing.
 8. Once the file has been created, share its file name with the user.
 
 ## Planning Rules
@@ -62,7 +59,7 @@ Do **not** add types, enum entries, config keys, DI wiring, fixtures, or mock up
 - Never leave code comments mentioning the phases
 
 <plan-template>
-# Implementation Plan: <Feature/TDD Name>
+# Implementation Plan: <Feature/Design Doc Name>
 
 ## Problem Statement
 

@@ -1,9 +1,6 @@
 ---
-name: add-new-app-screen
+name: android-add-new-app-screen
 description: Adds a new screen to the Waymap Android app by asking for the target module, package, screen name, and NavHost, then generating a minimal Hilt-enabled Compose screen, ViewModel, UI state, and NavController extension (plus graph entry) without adding DI modules or tests unless explicitly requested. Use when the user asks to create a new screen or navigation destination.
-version: 1.0.0
-autoTrigger: true
-projectTypes: [android, kotlin]
 ---
 
 # Add New App Screen

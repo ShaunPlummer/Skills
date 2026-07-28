@@ -1,6 +1,6 @@
 ---
-name: viewmodel-navigation-ui-state
-description: Models ViewModel-driven navigation as nullable screen-scoped navigation state in UiState (sealed type), with a clear consume callback on the ViewModel. Use when implementing unidirectional data flow, handling navigation from a ViewModel, replacing navigation Channels/SharedFlows, or when the user mentions UiState, StateFlow navigation, or one-shot nav from ViewModel.
+name: android-viewmodel-navigation-ui-state
+description: Models ViewModel-driven navigation as nullable screen-scoped navigation state in UiState (sealed type), with a clear consume callback on the ViewModel. Use when implementing unidirectional data flow, handling navigation from a ViewModel, replacing navigation Channels/SharedFlows, StateFlow navigation, or one-shot nav from ViewModel.
 ---
 
 # ViewModel navigation via UI state
@@ -38,7 +38,7 @@ sealed interface LoginNavigation {
 
 If every destination is argument-free, `enum` is acceptable; still use the same `<Screen>Navigation` name if the team standardizes on it.
 
-## Model `<Screen>UiState>`
+## Model `<Screen>UiState`
 
 Hold navigation as **nullable** meaning “no pending navigation.”
 

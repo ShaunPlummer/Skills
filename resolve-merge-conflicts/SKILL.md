@@ -1,8 +1,7 @@
 ---
-
 name: resolve-merge-conflicts
 description: Resolve conflicts in an in-progress Git merge or rebase. Use when a repository has unmerged paths, conflict markers, or a paused merge/rebase that must be investigated, resolved, tested, staged, and continued without discarding either side's intended behaviour.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 # Resolve Git merge and rebase conflicts
 

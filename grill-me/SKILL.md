@@ -13,7 +13,7 @@ If a question can be answered by exploring the codebase, explore the codebase in
 
 ### Challenge against the glossary
 
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+When a project `CONTEXT.md` (or equivalent glossary) exists, challenge terms that conflict with it. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?" If no glossary is present, propose precise canonical terms from the conversation and codebase instead.
 
 ### Sharpen fuzzy language
 

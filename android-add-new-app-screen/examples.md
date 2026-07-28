@@ -1,4 +1,4 @@
-# Examples for `add-new-app-screen`
+# Examples for `android-add-new-app-screen`
 
 These examples are based on your Android Studio file templates and follow the Waymap conventions described in `.cursorrules`. They are written with template placeholders such as `${NAME}` and `${PACKAGE_NAME}` so they can be adapted per screen.
 

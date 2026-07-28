@@ -1,9 +1,6 @@
 ---
 name: write-a-prd
-description: Create a Product Requirements Document (PRD) for a mobile application or SDK feature through structured stakeholder interviews. Use when creating a new feature, modifying existing behaviour, writing user stories, or documenting product requirements. Focus on WHAT and WHY, not HOW. Use the domain language and existing screens in this skill as product context.
-metadata:
-  author: Shaun Plummer
-  version: "0.1.0"
+description: Creates a Product Requirements Document (PRD) for a mobile application or SDK feature through structured stakeholder interviews. Use when creating a new feature, modifying existing behaviour, writing user stories, or documenting product requirements. Focus on WHAT and WHY, not HOW.
 ---
 
 # Process

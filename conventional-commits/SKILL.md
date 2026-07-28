@@ -1,8 +1,6 @@
 ---
-name: write-commit-message
-description: Use when creating git commits, writing commit messages, or when about to run git commit -- enforces structured commit message format with imperative mood
-metadata:
-  version: "1.0"
+name: conventional-commits
+description: Enforces structured Conventional Commits messages with imperative mood and no scope. Use when creating git commits, writing commit messages, or about to run git commit.
 ---
 
 # Overview
