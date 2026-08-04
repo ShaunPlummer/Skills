@@ -47,7 +47,7 @@ Diff: working tree including uncommitted changes vs origin/main
 Base Branch: origin/main
 
 Read ~/.cursor/skills/<review-*-name>/SKILL.md.
-Follow Role through Output. Ignore the "Cursor (single-lens)" section.
+Follow Role through Output.
 Return only the completed report template.
 ```
 
