@@ -20,7 +20,7 @@ Both coordinators are Skills, not custom subagents — neither platform needs an
 | | Claude Code | Cursor |
 |---|---|---|
 | Entry (full panel) | `.claude/skills/android-code-review/SKILL.md` | `.cursor/skills/android-code-review/SKILL.md` |
-| Specialist dispatch | Agent tool, `subagent_type: general-purpose`, prompted to load the matching root `review-*` skill | Task tool, `readonly: true` subagents, prompted to load the matching `.cursor/skills/review-*` skill |
+| Specialist dispatch | Agent tool, `subagent_type: general-purpose`, prompted to load the matching root `review-*` skill | Task tool, `readonly: true` subagents, prompted to load the matching `review-*` skill (installed at `~/.cursor/skills/`) |
 | Diff default | Working tree including uncommitted vs `origin/main` | Working tree including uncommitted vs `origin/main` |
 | Bugs | Built-in `/code-review` | Built-in Bugbot (`review-bugbot`) |
 | Security | Built-in `/security-review` | Built-in Security Review (`review-security`) |
@@ -30,8 +30,7 @@ Both coordinators are Skills, not custom subagents — neither platform needs an
 ```
 review-*/                      # agent-agnostic checklists (loaded via Skill tool)
 .cursor/skills/
-├── android-code-review/       # Cursor multi-lens coordinator
-└── review-*/                  # Cursor single-lens (launch + checklist)
+└── android-code-review/       # Cursor multi-lens coordinator
 .claude/skills/
 └── android-code-review/       # Claude multi-lens coordinator
 ```
@@ -40,7 +39,7 @@ review-*/                      # agent-agnostic checklists (loaded via Skill too
 
 This repo is an archive copy — not live via symlink.
 
-**Cursor:** copy each folder under `.cursor/skills/` into `~/.cursor/skills/` (overwrites same-named skills). Those folders are self-contained; do not copy root `review-*/` into `~/.cursor/skills/` or you will lose the Cursor launch section.
+**Cursor:** copy root `review-*/` into `~/.cursor/skills/`, and `.cursor/skills/android-code-review/` into `~/.cursor/skills/android-code-review/`.
 
 **Claude Code:** copy root `review-*/` into `~/.claude/skills/`, and `.claude/skills/android-code-review/` into `~/.claude/skills/android-code-review/`.
 
