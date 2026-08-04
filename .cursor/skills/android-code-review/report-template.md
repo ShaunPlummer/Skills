@@ -1,3 +1,5 @@
+`<template>` = that reviewer's own completed report, returned verbatim per its `review-*` skill's Output section (see Step 2's dispatch prompt).
+
 ```markdown
 # Consolidated Code Review
 
