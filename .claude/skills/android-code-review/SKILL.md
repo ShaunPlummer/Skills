@@ -61,39 +61,7 @@ Cross-index findings by file and location across two or more reviewers. Surface 
 
 Normalize, deduplicate, and cross-reference findings. Do not create new findings or resolve conflicts between reviewers.
 
-```markdown
-# Consolidated Code Review
-
-**Scope:** origin/main vs working tree (including uncommitted), <file count> files
-**Reviewers:** 4 lenses — <list any that did not complete>
-**Out of scope:** bug correctness and security (run `/code-review` or `/security-review` separately)
-
-## Overall Summary
-<!-- severity counts -->
-
-### Conflicting or Overlapping Findings
-<!-- or none -->
-
----
-
-## Architecture Guide Review
-<template>
-
----
-
-## Architecture Recommendations Review
-<template>
-
----
-
-## Unit Test Coverage Review
-<template>
-
----
-
-## Kotlin & Coroutines Review
-<template>
-```
+Fill in the template in `report-template.md` (alongside this file).
 
 **Optional side effect:** write the report to `<repo-root>/build/reports/code-review-report.md` only when explicitly requested.
 
