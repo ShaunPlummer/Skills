@@ -13,9 +13,9 @@ Agent-agnostic review checklists in the root; agent-specific orchestration in `.
 
 Each root `SKILL.md` holds the checklist and report template only — no agent-specific instructions.
 
-## Agent-specific orchestration
+## Orchestration
 
-Both coordinators are Skills, not custom subagents — neither platform needs any agent-specific files beyond the coordinator itself. Each dispatches parallel specialist reviewers using its built-in generic subagent mechanism, parameterized entirely by prompt: the reviewer's role comes from which `review-*` skill the dispatch prompt tells it to load, not from a dedicated agent definition per lens.
+Each platform has one coordinator skill that dispatches parallel specialist reviewer subagents by prompt — the prompt tells each subagent which root `review-*` skill to load.
 
 | | Claude Code | Cursor |
 |---|---|---|
