@@ -15,23 +15,25 @@ Each root `SKILL.md` holds the checklist and report template only — no agent-s
 
 ## Agent-specific orchestration
 
+Both coordinators are Skills, not custom subagents — neither platform needs any agent-specific files beyond the coordinator itself. Each dispatches parallel specialist reviewers using its built-in generic subagent mechanism, parameterized entirely by prompt: the reviewer's role comes from which `review-*` skill the dispatch prompt tells it to load, not from a dedicated agent definition per lens.
+
 | | Claude Code | Cursor |
 |---|---|---|
-| Entry (full panel) | `.claude/agents/review-coordinator.md` (`code-review-coordinator`) | `.cursor/skills/android-code-review/SKILL.md` |
-| Specialist runners | `.claude/agents/review-*.md` (thin wrappers; Skill tool loads root `review-*`) | `.cursor/skills/review-*/SKILL.md` (combined Cursor launch + checklist; Task subagents) |
+| Entry (full panel) | `.claude/skills/android-code-review/SKILL.md` | `.cursor/skills/android-code-review/SKILL.md` |
+| Specialist dispatch | Agent tool, `subagent_type: general-purpose`, prompted to load the matching root `review-*` skill | Task tool, `readonly: true` subagents, prompted to load the matching `.cursor/skills/review-*` skill |
 | Diff default | Working tree including uncommitted vs `origin/main` | Working tree including uncommitted vs `origin/main` |
 | Bugs | Built-in `/code-review` | Built-in Bugbot (`review-bugbot`) |
-| Security | Same built-in review surface | Built-in Security Review (`review-security`) |
+| Security | Built-in `/security-review` | Built-in Security Review (`review-security`) |
 
 ## Layout
 
 ```
-review-*/                      # agent-agnostic checklists (Claude Skill tool)
+review-*/                      # agent-agnostic checklists (loaded via Skill tool)
 .cursor/skills/
 ├── android-code-review/       # Cursor multi-lens coordinator
 └── review-*/                  # Cursor single-lens (launch + checklist)
-.claude/
-└── agents/                    # Claude coordinator + thin reviewers
+.claude/skills/
+└── android-code-review/       # Claude multi-lens coordinator
 ```
 
 ## Install
@@ -40,11 +42,10 @@ This repo is an archive copy — not live via symlink.
 
 **Cursor:** copy each folder under `.cursor/skills/` into `~/.cursor/skills/` (overwrites same-named skills). Those folders are self-contained; do not copy root `review-*/` into `~/.cursor/skills/` or you will lose the Cursor launch section.
 
-**Claude Code:** copy root `review-*/` into `~/.claude/skills/`, and `.claude/agents/*.md` into `~/.claude/agents/`.
+**Claude Code:** copy root `review-*/` into `~/.claude/skills/`, and `.claude/skills/android-code-review/` into `~/.claude/skills/android-code-review/`.
 
 ## Usage
 
 **Cursor full panel:** "Run android-code-review"  
-**Claude full panel:** "Use the code-review-coordinator"  
-**Single lens (Cursor):** invoke `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, or `review-kotlin-coroutines`  
-**Single lens (Claude):** invoke `architecture-guide-reviewer`, `architecture-recommendations-reviewer`, `test-coverage-reviewer`, or `kotlin-coroutines-reviewer`
+**Claude full panel:** "Run android-code-review" (loads the `android-code-review` skill)  
+**Single lens (either platform):** invoke `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, or `review-kotlin-coroutines` directly
