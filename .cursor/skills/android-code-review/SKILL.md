@@ -63,48 +63,7 @@ Cross-index same file+line/function across 2+ reviewers. Surface severity disagr
 
 ## Step 4 — Consolidated report
 
-```markdown
-# Consolidated Code Review
-
-**Scope:** <diff mode, repo path>
-**Reviewers:** 6 dispatched — <list any that did not complete>
-
-## Overall Summary
-<!-- severity counts -->
-
-### Conflicting or Overlapping Findings
-<!-- or none -->
-
----
-
-## Architecture Guide Reviewer
-<template>
-
----
-
-## Architecture Recommendations Reviewer
-<template>
-
----
-
-## Bug Reviewer (Bugbot)
-<!-- summary + Severity | Location | Finding table -->
-
----
-
-## Unit Test Coverage Reviewer
-<template>
-
----
-
-## Kotlin & Coroutines Reviewer
-<template>
-
----
-
-## Security Reviewer
-<!-- summary + Severity | Location | Finding table -->
-```
+Fill in the template in `report-template.md` (alongside this file).
 
 Response = report. Optional write: `code-review-report.md` in repo root only. Do not fix or rerun unless asked.
 
