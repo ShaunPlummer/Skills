@@ -1,6 +1,6 @@
 ---
-name: conventional-commits
-description: Enforces structured Conventional Commits messages with imperative mood and no scope. Use when creating git commits, writing commit messages, or about to run git commit.
+name: commit-changes
+description: Enforces structured Conventional Commits messages with imperative mood and no scope. Use when creating git commits, writing commit messages.
 ---
 
 # Overview
@@ -61,7 +61,7 @@ Only update the journey origin when no journey is active. During an active
 journey, the nearby maps screen instead displays the `Use GPS` option,
 allowing the user to reset the origin explicitly when needed.
 
-issue: 33362
+issue: #123
 ```
 
 ## Commit message with both ! and BREAKING CHANGE footer
@@ -87,27 +87,33 @@ BREAKING CHANGE: use JavaScript features not available in Node 6.
 13. If included in the type prefix, breaking changes MUST be indicated by a ! immediately before the :. If ! is used, BREAKING CHANGE: MAY be omitted from the footer section, and the commit description SHALL be used to describe the breaking change.
 14. A commit type and description MUST be written in lower case.
 
-# Body guidance
+# Commit body policy
+
+Inspect the complete staged diff and relevant task context before writing the
+commit message. Base the message only on information supported by the changes,
+the repository, or the user's stated intent. Never invent rationale, trade-offs,
+or decision history.
+
+Use at least one substantive sentence for each applicable subject. A non-trivial
+commit will typically need two or three paragraphs and roughly 80–180 words.
+Treat this as a completeness target, not a reason to add filler.
 
 Do not merely repeat what changed; that is already visible in the diff. Use
 the commit body to explain:
-
-- An overview of how the solution works
-- why the change was necessary;
-- what problem it solves;
-- how the chosen approach solves that problem; and
+- An overview of how the solution works.
+- why the change was necessary.
+- what problem it solves.
+- how the chosen approach solves that problem.
 - any important constraints, risks, or trade-offs.
+- Reference causal relationships
 
 When alternatives were seriously considered, briefly explain why the chosen
 approach was preferred. Do not invent alternatives or decision history when
 none existed.
 
-Omit the body when the description fully explains the purpose and impact of
-the change.
+Omit obvious details, irrelevant history, speculative benefits, and invented
+ alternatives. If the description is sufficient, omit the body.
 
-Keep the body brief and concise. Omit obvious details, irrelevant history, speculative
-benefits, and invented alternatives. If the description is sufficient, omit
-the body.
 
 # Attribution
 
