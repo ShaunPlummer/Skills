@@ -3,7 +3,6 @@ name: review-test-coverage
 description: >-
   Reviews unit test adequacy for Android/Kotlin changes — NO TESTS / WEAK TESTS /
   STALE TESTS.
-disable-model-invocation: true
 metadata:
   version: "1.1"
 ---
