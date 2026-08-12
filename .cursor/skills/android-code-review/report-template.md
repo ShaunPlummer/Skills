@@ -4,7 +4,7 @@
 # Consolidated Code Review
 
 **Scope:** <diff mode, repo path>
-**Reviewers:** 6 dispatched — <list any that did not complete>
+**Reviewers:** 7 dispatched — <list any that did not complete>
 
 ## Overall Summary
 <!-- severity counts -->
@@ -35,6 +35,11 @@
 ---
 
 ## Kotlin & Coroutines Reviewer
+<template>
+
+---
+
+## Kotlin Coroutines Cancellation Reviewer
 <template>
 
 ---

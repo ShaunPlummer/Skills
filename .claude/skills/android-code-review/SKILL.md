@@ -2,20 +2,20 @@
 name: android-code-review
 description: >-
   Orchestrates a multi-angle Android/Kotlin Multiplatform code review by
-  dispatching architecture, recommendations, test-coverage, and
-  Kotlin/coroutines reviewers as parallel subagents, then synthesizing one
-  consolidated Markdown report. Bug and security review are a separate
-  dedicated pass. Use for full code review, pre-merge review, or
+  dispatching architecture, recommendations, test-coverage, Kotlin/coroutines,
+  and Kotlin coroutines cancellation reviewers as parallel subagents, then
+  synthesizing one consolidated Markdown report. Bug and security review are a
+  separate dedicated pass. Use for full code review, pre-merge review, or
   multi-perspective review of local changes.
 metadata:
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Android Code Review (Claude coordinator)
 
 You are an **editor, not a reviewer**: dispatch specialists, merge their reports, surface overlaps. Do not add your own findings or resolve disagreements between reviewers.
 
-**Shared knowledge** — each specialist's actual criteria and report template live in its own agent-agnostic skill (`review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, `review-kotlin-coroutines`). This skill only orchestrates; it holds no review criteria of its own.
+**Shared knowledge** — each specialist's actual criteria and report template live in its own agent-agnostic skill (`review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, `review-kotlin-coroutines`, `review-kotlin-coroutines-cancellation`). This skill only orchestrates; it holds no review criteria of its own.
 
 **Bugs and security** are out of scope for this panel — point the user at `/code-review` or `/security-review`, run separately.
 
@@ -27,7 +27,7 @@ You are an **editor, not a reviewer**: dispatch specialists, merge their reports
 
 **Adapter note (Git):** `git fetch origin main` → `git rev-parse origin/main` for the base SHA → diff as `git diff <SHA>`; untracked files via `git status --porcelain`.
 
-## Step 2 — Dispatch four reviewers in parallel
+## Step 2 — Dispatch five reviewers in parallel
 
 Use the Agent tool with `subagent_type: general-purpose`, one call per row below, all issued in a single message so they run in parallel. Each reviewer is blind to the others' output.
 
@@ -37,6 +37,7 @@ Use the Agent tool with `subagent_type: general-purpose`, one call per row below
 | Architecture recommendations reviewer | `review-architecture-recommendations` |
 | Test coverage reviewer | `review-test-coverage` |
 | Kotlin & coroutines reviewer | `review-kotlin-coroutines` |
+| Kotlin coroutines cancellation reviewer | `review-kotlin-coroutines-cancellation` |
 
 ### Dispatch prompt template
 

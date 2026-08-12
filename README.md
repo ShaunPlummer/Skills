@@ -10,6 +10,7 @@ Agent-agnostic review checklists in the root; agent-specific orchestration in `.
 | `review-architecture-recommendations/` | Android Recommendations |
 | `review-test-coverage/` | Unit test adequacy |
 | `review-kotlin-coroutines/` | Kotlin + coroutines/Flow idiom |
+| `review-kotlin-coroutines-cancellation/` | Cooperative cancellation and cleanup |
 
 Each root `SKILL.md` holds the checklist and report template only — no agent-specific instructions.
 
@@ -47,4 +48,4 @@ This repo is an archive copy — not live via symlink.
 
 **Cursor full panel:** "Run android-code-review"  
 **Claude full panel:** "Run android-code-review" (loads the `android-code-review` skill)  
-**Single lens (either platform):** invoke `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, or `review-kotlin-coroutines` directly
+**Single lens (either platform):** invoke `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, `review-kotlin-coroutines`, or `review-kotlin-coroutines-cancellation` directly
