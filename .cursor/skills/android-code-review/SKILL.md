@@ -3,12 +3,13 @@ name: android-code-review
 description: >-
   Orchestrates a multi-angle Android/Kotlin Multiplatform code review for Cursor.
   Dispatches architecture-guide-reviewer, architecture-recommendations-reviewer,
-  test-coverage-reviewer, and kotlin-coroutines-reviewer as read-only subagents,
-  plus built-in Bugbot and Security Review. Synthesizes one consolidated Markdown
-  report. Use for full code review, pre-merge review, or multi-perspective review
-  of local changes.
+  test-coverage-reviewer, kotlin-coroutines-reviewer, and
+  kotlin-coroutines-cancellation-reviewer as read-only subagents, plus built-in
+  Bugbot and Security Review. Synthesizes one consolidated Markdown report. Use
+  for full code review, pre-merge review, or multi-perspective review of local
+  changes.
 metadata:
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Android Code Review (Cursor coordinator)
@@ -26,7 +27,7 @@ Record absolute repo path and diff mode. Do not pre-compute the diff for Bugbot/
 
 Optional: if `<repo>/.cursor/skills/android-code-review/conventions.md` exists, pass its path to every custom reviewer.
 
-## Step 2 — Dispatch six reviewers in parallel
+## Step 2 — Dispatch seven reviewers in parallel
 
 One batch of Task calls, all `readonly: true`, all `run_in_background: false`.
 
@@ -36,6 +37,7 @@ One batch of Task calls, all `readonly: true`, all `run_in_background: false`.
 | Architecture Recommendations | `architecture-recommendations-reviewer` | `review-architecture-recommendations` |
 | Test Coverage | `test-coverage-reviewer` | `review-test-coverage` |
 | Kotlin & Coroutines | `kotlin-coroutines-reviewer` | `review-kotlin-coroutines` |
+| Kotlin Coroutines Cancellation | `kotlin-coroutines-cancellation-reviewer` | `review-kotlin-coroutines-cancellation` |
 | Bugbot | `bugbot` | `review-bugbot` skill |
 | Security Review | `security-review` | `review-security` skill |
 
@@ -69,4 +71,4 @@ Response = report. Optional write: `code-review-report.md` in repo root only. Do
 
 ## Single-lens
 
-Use `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, `review-kotlin-coroutines`, `review-bugbot`, or `review-security` directly.
+Use `review-architecture-guide`, `review-architecture-recommendations`, `review-test-coverage`, `review-kotlin-coroutines`, `review-kotlin-coroutines-cancellation`, `review-bugbot`, or `review-security` directly.

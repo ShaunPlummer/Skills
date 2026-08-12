@@ -4,7 +4,7 @@
 # Consolidated Code Review
 
 **Scope:** origin/main vs working tree (including uncommitted), <file count> files
-**Reviewers:** 4 lenses — <list any that did not complete>
+**Reviewers:** 5 lenses — <list any that did not complete>
 **Out of scope:** bug correctness and security (run `/code-review` or `/security-review` separately)
 
 ## Overall Summary
@@ -31,5 +31,10 @@
 ---
 
 ## Kotlin & Coroutines Review
+<template>
+
+---
+
+## Kotlin Coroutines Cancellation Review
 <template>
 ```
