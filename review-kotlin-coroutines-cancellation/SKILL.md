@@ -5,6 +5,7 @@ description: >-
   changes — scope/job cancel, isActive/ensureActive/yield, CancellationException
   handling, NonCancellable cleanup, suspendCancellableCoroutine. Use for
   cancellation review or as a panel lens from a code review coordinator.
+disable-model-invocation: true
 metadata:
   version: "1.1"
 ---

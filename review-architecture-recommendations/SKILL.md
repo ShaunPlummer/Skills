@@ -4,6 +4,7 @@ description: >-
   Reviews Android/Kotlin changes against Android's prescriptive architecture
   Recommendations — lifecycle-aware APIs, SavedStateHandle, DI, modules, testing
   guidance.
+disable-model-invocation: true
 metadata:
   version: "1.1"
 ---

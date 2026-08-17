@@ -4,6 +4,7 @@ description: >-
   Reviews Android/Kotlin Multiplatform changes against Google's Guide to app
   architecture — layering, UDF, ViewModel, SSOT, repository boundaries. Use for
   architecture-principles review or as a panel lens from a code review coordinator.
+disable-model-invocation: true
 metadata:
   version: "1.1"
 ---

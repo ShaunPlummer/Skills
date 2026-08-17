@@ -3,6 +3,7 @@ name: review-kotlin-coroutines
 description: >-
   Reviews idiomatic Kotlin and coroutines/Flow usage in Android/Kotlin changes.
   Correctness crashes/leaks belong to built-in bug review, not this lens.
+disable-model-invocation: true
 metadata:
   version: "1.1"
 ---
