@@ -39,6 +39,9 @@ Reconcile the conversation into a final decision set:
 
 <tdd-template>
 
+> This is a living design document that reflects the current intended end state and will be updated as the design evolves. It does not describe or track implementation progress or completed work.
+
+
 ## Problem Statement
 
 The problem that the user is facing, from the user's perspective.
@@ -55,7 +58,7 @@ A numbered list of assumptions being made.
 
 ### Blocking
 
-A numbered list of questions that must be resolved before the design can be approved.
+A numbered list of questions that the user must be resolved before the design can be approved.
 
 ### Non-blocking
 
@@ -87,27 +90,29 @@ A numbered list of any relevant acceptance criteria for the story, written in a 
 
 ### Story: 1 - App Launch
 
-#### AC 1.1
+#### AC 1.1 Personalised Adds are displayed for authenticated users
 
-Given a user is logged in
+	Given a user is logged in
 
-When the home page loads
+	When the home page loads
 
-Then the personalised list of articles is displayed.
+	Then the personalised list of articles is displayed.
 
 
-#### AC 1.2
+#### AC 1.2 unauthenticated users are prompted to sign in
 
-Given a user is not logged in
+	Given a user is not logged in
 
-When the home page loads
+	When the home page loads
 
-Then a sign-in prompt is displayed.
+	Then a sign-in prompt is displayed.
 
 
 </story-details-example>
 
 ## Implementation Decisions
+
+< solution diagram(s) >
 
 A list of implementation decisions that were made or proposed, grouped by section. Include only relevant subsections.
 
