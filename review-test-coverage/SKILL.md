@@ -1,8 +1,6 @@
 ---
 name: review-test-coverage
-description: >-
-  Reviews unit test adequacy for Android/Kotlin changes — NO TESTS / WEAK TESTS /
-  STALE TESTS.
+description: Review the level of unit test coverage within a project. Checking the line coverage and branch coverage.
 disable-model-invocation: true
 metadata:
   version: "1.1"
@@ -38,6 +36,9 @@ For each changed production file, **search for tests** (`src/test/`, `commonTest
 
 **Staleness**
 - Behavior changed but tests not updated honestly; orphaned tests for deleted code.
+
+** Stateful verification **
+- Always prefer stateful verification over behavioural verification and look for opportunities to recomend the former.
 
 ## Severity guidance
 
