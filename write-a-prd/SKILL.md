@@ -173,6 +173,8 @@ Unless documenting the public contract of an SDK.
 
 <prd-template>
 
+> > This is a living requirements document that reflects the current intended end state and will be updated as the design evolves. It does not describe or track implementation progress or completed work.
+
 # Problem Statement
 
 Describe the user's problem.
@@ -180,6 +182,20 @@ Describe the user's problem.
 # Solution
 
 Describe the proposed behaviour from the user's perspective.
+
+# Assumptions
+
+A numbered list of assumptions being made.
+
+# Open Questions
+
+## Blocking
+
+A numbered list of questions that the user must be resolved before the design can be approved.
+
+## Non-blocking
+
+A numbered list of questions that can be resolved during planning or implementation without changing the agreed behavior.
 
 # User Stories
 
