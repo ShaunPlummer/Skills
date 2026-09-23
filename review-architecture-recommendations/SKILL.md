@@ -6,7 +6,7 @@ description: >-
   guidance.
 disable-model-invocation: true
 metadata:
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Review Architecture Recommendations
@@ -39,8 +39,9 @@ You review Android's **"Recommendations for Android architecture"** (developer.a
 - *Recommended:* Feature/layer modules; correct dependency direction.
 
 **Testing guidance**
-- *Strongly recommended:* Test ViewModels, data mapping/logic, use cases; prefer fakes over mocks at repository seams. (Coverage depth → `review-test-coverage`.)
-- *Recommended:* StateFlow tested with proper collection, not blind `.value` reads.
+- *Strongly recommended:* Test ViewModels (including Flows), data mapping/logic, use cases; prefer fakes over mocks at repository seams. (Coverage depth → `review-test-coverage`.)
+- *Strongly recommended:* Test `StateFlow` as a data holder — assert on `value` whenever possible ([Architecture recommendations](https://developer.android.com/topic/architecture/recommendations), [Test Kotlin flows](https://developer.android.com/kotlin/flow/test)). Do **not** flag `.value` snapshot assertions as an anti-pattern; prefer them over asserting every intermediate emission (StateFlow is conflated).
+- For `stateIn` with `WhileSubscribed` / `Lazily`, sharing starts only with a collector. Documented pattern: empty `backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { flow.collect {} }`, then assert on `value`. `first { }` / Turbine also count as collectors. Flag `.value` reads **without any collector** on those `SharingStarted` policies (value never updates), not collect-then-`.value`.
 
 ## Severity guidance
 
