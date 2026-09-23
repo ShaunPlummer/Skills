@@ -1,0 +1,14 @@
+interface:
+  display_name: Review Coroutines Flow Tests
+  short_description: Review Android Flow tests for reliable assertions
+  default_prompt: Use $review-coroutines-flow-tests to review these Android Kotlin
+    Flow tests.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
