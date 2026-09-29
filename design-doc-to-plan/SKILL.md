@@ -14,6 +14,7 @@ Break a provided design document (TDD) into a phased implementation plan using v
 3. Identify key architecture decisions on which the solution is being built.
 4. Ask questions about unresolved decisions or ambiguities that prevent the template from being completed or affect the proposed plan.
 5. Draft a series of vertical slices matching the provided rules.
+5b. Anti-Pattern Self-Check:Inspect the drafted phases for the following anti-patterns before saving:❌ The Static UI Trap: Creating UI layout/mapping for dynamic status in Phase $N$ while deferring live stream collection (Flow.collect, reactive observers) to Phase $N+1$.❌ Untestable Increments: Any phase where a developer cannot visually observe the ACs working end-to-end on a live build because lower/higher layers aren't connected yet.❌ Dangling Mappers: Adding UI mapping code and static unit tests without connecting them to the screen's active ViewModel state pipeline.
 6. Once you have a complete understanding of the problem and solution, use the template below to write the plan to a file. Create the `<repo-root>/.plans/` directory if it doesn't exist. Write the plan as a Markdown file named after the feature. If you know the task ID, use it to prefix the file name (e.g., `<repo-root>/.plans/33050-user-onboarding.md`).
 7. Compare the newly created plan against the original design document to confirm no requirements or design decisions are missing.
 8. Once the file has been created, share its file name with the user.
@@ -27,6 +28,14 @@ Break a provided design document (TDD) into a phased implementation plan using v
 - Each phase must be independently demoable or verifiable.
 - Keep phases small enough to integrate, review, and receive feedback quickly.
 - A story may span multiple phases, with each phase delivering a distinct subset of its acceptance criteria.
+- Never leave comments in the code referencing phases of the implementation plan. You must only ever document the current state of the codebase.
+
+### UI and Data Stream Coupling
+- **Never split UI display wiring and the underlying reactive data path into separate phases.** 
+- If a phase introduces or updates a UI surface to render dynamic state (e.g., Scheduled / Delayed / Cancelled, status badges, overlays):
+  - The phase **MUST** wire the real reactive data source (`Flow`, `LiveData`, observer, etc.) into the ViewModel or UI controller in that same phase.
+  - A phase cannot land UI layout/mapping for dynamic states while relying solely on static, one-shot, or mock/plan-cache data sources if the design calls for live updates.
+- If an underlying SDK dependency, endpoint, or reactive method (e.g., `observeJourneySummary`) is required to drive the UI state, pin the dependency and wire the reactive pipeline in the **same phase** as the UI update.
 
 ### Just-in-time introduction (no forward scaffolding)
 
@@ -69,10 +78,16 @@ The problem that the user is facing, from the user's perspective.
 
 The solution to the problem, from the user's perspective.
 
+## Phases
+
+| Phase | Goal | Outline |
+| -- 	| --	| --  |
+|Phase Name | Key Aims | Description of changes |
+
 <phase-template>
 ## Phase 1: <Title>
 
-A description of the scope and outcome for the phase.
+A description of the phase. Including the part of the problem it attempts to address as well as the goals and outcomes of the phase.
 
 ### Story: <Story Number> - <Scenario Name>
 
@@ -96,7 +111,10 @@ A numbered list of any relevant acceptance criteria for the story, written in a 
 - Confirm `./gradlew check` passes.
 - Manual steps needed to demonstrate the slice.
 - There is a unit test for every BDD scenario implemented in this phase
-
+- **End-to-End / Interactive Verification:**
+  - Explicitly detail how this slice will be verified in a running application session (e.g., "Start navigation, trigger SDK overlay poll, observe Summary UI dynamically updates from Scheduled to Delayed without re-opening the screen").
+  - **Verification Gate:** If a phase cannot be validated in a real user flow because the live data pipeline is missing, the slice is invalid and MUST be merged with the data wiring phase.
+  
 #### Testing Data
 
 ### Phase out of scope

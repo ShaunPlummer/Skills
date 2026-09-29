@@ -1,5 +1,5 @@
 ---
-name: write-a-view-model-test
+name: write-a-view-model-test-with-dsl
 description: Creates or updates Android ViewModel unit tests using coroutine test best practices, test scope DSL patterns, and UiState Flow assertions. Use when the user asks to write ViewModel tests, test StateFlow/Flow uiState, inject test dispatchers, or fix flaky coroutine-based unit tests.
 ---
 
