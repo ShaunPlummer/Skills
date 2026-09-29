@@ -5,11 +5,12 @@ description: Creates a Technical Design Document grounded in the current codebas
 
 ## Process
 
-1. Gather and reconcile the required information using the instructions below.
+1. Complete 'Information Gathering' and 'Reconcile the Conversation' steps using the instructions below.
 2. Once all material blocking questions are resolved and remaining assumptions are documented, complete the TDD template.
 3. Create `<repo-root>/.tdd/` if it does not exist.
 4. Write the TDD as a Markdown file named after the feature. If you know the task ID, use it to prefix the file name (e.g. `<repo-root>/.tdd/33050-user-onboarding.md`).
-5. Once the file has been created, share its file name with the user.
+5. Complete the 'Review and Revision' instructions below.
+6. Once the file has been created, share its file name with the user.
 
 ## Information Gathering
 
@@ -36,6 +37,14 @@ Reconcile the conversation into a final decision set:
   repository.
 - Preserve material negative decisions, constraints, and deliberately deferred
   work.
+- Put verified facts that inform the design under Key Considerations.
+- Put required behaviour under acceptance criteria or relevant implementation section.
+- Put selected technical approaches under Implementation Decisions.
+
+### Review and Revision
+
+- Review all sections of the document for consistency
+- Review the document for duplicated information that can be removed. 
 
 <tdd-template>
 
@@ -50,9 +59,23 @@ The problem that the user is facing, from the user's perspective.
 
 The solution to the problem, from the user's perspective.
 
+## Key considerations
+
+A numbered list of requirements and constraints on which the design should be based. For each item state why the design must take it into consideration. This section should outline inputs to the design and not include implementation decisions made in response to the constraints. These are documented later in the template.
+
+This section may include repository verified facts that must not be changed as part of this design.
+
 ## Assumptions
 
-A numbered list of assumptions being made.
+A numbered list of unverified conditions the design relies on. For each assumption, include how they will be validated and what changes if they proven false.
+
+## Risks
+
+A numbered list of major risks which have been identified and any mitigations which can be implemented.
+
+## Dependencies
+
+A numbered list dependencies. This can include external work or other development efforts.
 
 ## Open Questions
 
@@ -110,35 +133,39 @@ A numbered list of any relevant acceptance criteria for the story, written in a 
 
 </story-details-example>
 
-## Implementation Decisions
+## Implementation Outline
 
-< solution diagram(s) >
+Explain how the proposed solution works in a series of connected paragraphs. Describe the intended end state, the changes to existing behaviour, and how the affected components interact. Clearly outine relationships between UI, domain and data layers of the application.
 
-A list of implementation decisions that were made or proposed, grouped by section. Include only relevant subsections.
+Provide enough detail for a reader to understand the solution without reconstructing it from the implementation decisions. Focus on responsibilities, interactions, and data flow. Include only relevant subsections, adapting the headings to the system's architecture.
+
+Do NOT include complete file paths. Do include class names, representations of the package structure. You may include concise contract, schema, or pseudocode examples.
 
 ### Solution Diagrams
 
 Include one or more diagrams using MermaidJS to provide a visual illustration of the relationship between components.
 
-### General
+### Components and Responsibilities
 
-* The project modules that will be added or modified.
-* Architectural decisions.
-* Technical clarifications from the developer.
+Describe the components that will be added or modified, their responsibilities, and how they interact.
 
-### Data and Persistence Layer
+### Data and Interfaces
 
-* Data sources to be modified or new ones to be created.
-* API contracts.
-* Data storage mechanisms (file/key-value/SQL, etc.).
+Describe relevant data sources, API contracts, storage mechanisms, and the flow of data through the application layers. Explain changes to existing components and persisted data.
 
-### Domain Layer
+### Domain Behaviour
 
-* Use cases to be modified or new ones to be created.
+Describe the use cases and business logic being introduced or changed. Consider happy and error path behaviour.
 
-Do NOT include complete file paths or code snippets. They may become outdated very quickly. Class names and representations of the package structure are okay.
+## Implementation Decisions
+
+A numbered list of significant implementation decisions made in response to the requirements and considerations that affect the final design. Include decisions where a alternative existed but was not selected.
+
+For each decision capture the choice, why it was selected and any significant trade-offs or consequences of this decision. Avoid repeating the implementation outline. Each item should be concise.
 
 ### Failure Handling
+
+A numbered list of possible failure scenarios and a description of how the design responds when failures do occur.
 
 ## Testing Strategy
 
@@ -159,11 +186,11 @@ The range of data required for testing
 
 ## Out of Scope
 
-A numbered list describing things that are out of scope for this spec.
+A numbered list describing functionality, problems or modifications that this design deliberately does not change.
 
 ## Alternatives Considered
 
-Any other major or significant design choices that were discarded.
+Describe alternative approaches to solving the problem statement which were not selected. This section must not make assumptions about why the user rejected the solution. Only include reasons why they explicitially tell you why it was rejected. 
 
 ## Further Notes
 
