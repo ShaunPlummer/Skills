@@ -14,6 +14,7 @@ disable-model-invocation: true
 - Use plain language that’s easy to understand.
 - Document only necessary information.
 
+
 Begin the description of entry points with a clear, high-level description of what the function does. Avoid simply restating the signature in natural language.
 
 For example, don't say “takes a String and returns a Connection” but instead perhaps “Attempts to connect to the database specified by the input string, returning a Connection if successful, and throwing a ConnectionTimeoutException otherwise”.
@@ -21,6 +22,8 @@ For example, don't say “takes a String and returns a Connection” but instead
 Specify each input's expected values and behavior with different inputs. Explain the range of valid values and what happens when invalid values are provided. For example, if a string input is supposed to be a URL, describe what happens when the string is empty, invalid, uses an unsupported protocol, or refers to a location that does not exist.
 
 Document every exception an API entry point may throw. Discuss failure conditions in the general description and reserve the exception section for detailed information. This enhances readability and helps the reader focus. Instead, include this information organically into the general description. Providing usage examples whenever possible also helps users understand how to use the API correctly.
+
+Document interfaces as contracts, describing the behaviour, inputs, outputs, and guarantees that every implementation must satisfy. Keep this documentation independent of implementation choices, placing details such as storage technologies, algorithms, and internal mechanisms on the concrete implementations. Implementation-specific documentation should clarify how an implementation fulfils the shared contract without contradicting its guarantees.
 
 ## Formatting Rules
 For longer documentation comments, place the opening /** on a separate line and begin each subsequent line with an asterisk:
