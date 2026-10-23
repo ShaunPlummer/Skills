@@ -1,5 +1,5 @@
 ---
-name: review-kotlin-coroutines
+name: maintain-documentation
 description: >-
   Reviews documentation no classes, function and  properties to identify improvements.
 disable-model-invocation: true
