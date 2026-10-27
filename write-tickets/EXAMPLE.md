@@ -1,4 +1,3 @@
-
 # Ticket: add search functionality
 <ticket>
 <title>
@@ -14,11 +13,11 @@ So that I can discover new shows
 <description>
 Add a data layer method to `PodcastRemoteDataSource` and `DefaultPodcastRepository` to search podcasts via the Podcast Index API. Follow the existing data-source, repository, and dependency-injection conventions. Reuse existing interfaces where available, and introduce or extend interfaces only as needed to substitute fake implementations in tests.
 
-A `SearchPodcastsUseCase` should be created to execute search queries and return matching results. The use case should be responsible for trimming leading and trailing whitespace from search queries before submitting them. It should block searching when the request is empty of blank.
+A `SearchPodcastsUseCase` should be created to execute search queries and return matching results. The use case should be responsible for trimming leading and trailing whitespace from search queries before submitting them. It should block searching when the request is empty or blank.
 
 Add a new `SearchScreen` destination to the Jetpack Compose navigation graph backed by a `SearchScreenViewModel`. `SearchScreenViewModel` should be responsible for catching errors and showing the corresponding UI state.
 
-The search functionality should implement a debounce to ensure a query is only submitted when a user stop typing for 300 ms.
+The search functionality should implement a debounce to ensure a query is only submitted when a user stops typing for 300 ms.
 
 The `SearchScreenViewModel` should implement search-as-you-type with a 300 ms debounce. It should initiate a search only after the query has remained unchanged for the debounce interval. Empty or whitespace-only queries must not trigger a network request. The `SearchPodcastsUseCase` is responsible for trimming leading and trailing whitespace and rejecting blank queries before invoking the repository.
 </description>
@@ -55,16 +54,16 @@ The `SearchScreenViewModel` should implement search-as-you-type with a 300 ms de
 <verification>
 # Verification
 1. Verify that `SearchScreenViewModel` exposes the correct UI state for initial, loading, results, no-results, and error scenarios. Verify retry, query normalization integration, blank-query handling, and debounced search behavior where appropriate. Use the real `SearchPodcastsUseCase` backed by a controllable `FakePodcastRepository`.
-2. Unit Tests: Verify `SearchPodcastsUseCaseTest` returns correct search results for a given query string. Make use `FakePodcastRepository` to provide test data.
-3. Unit Tests: Verify `DefaultPodcastRepository` returns correct search results for a given query string. Make use `FakePodcastRemoteDataSource` to provide test data.
-4. Unit Tests: Verify `PodcastRemoteDataSource` returns correct search results for a given query string. Make of a mock http client to return mock responses to API requests for testing.
+2. Unit Tests: Verify `SearchPodcastsUseCaseTest` returns correct search results for a given query string. Make use of `FakePodcastRepository` to provide test data.
+3. Unit Tests: Verify `DefaultPodcastRepository` returns correct search results for a given query string. Make use of `FakePodcastRemoteDataSource` to provide test data.
+4. Unit Tests: Verify `PodcastRemoteDataSource` returns correct search results for a given query string. Make use of a mock HTTP client to return mock responses to API requests for testing.
 </verification>
 
 <acceptance-criteria>
 # Acceptance Criteria
 ## AC 1: Initial Load
-Given a user navigates to the search screen 
-When no query has been entered, 
+Given a user navigates to the search screen
+When no query has been entered,
 Then an initial state screen is displayed prompting the user to search.
 
 ## AC 2: Loading
@@ -88,43 +87,44 @@ Given a user enters a search query
 When a network error occurs
 Then a user-friendly error message is displayed with a retry option.
 
-### AC 6: Debounced Search
+## AC 6: Debounced Search
 Given the user enters or modifies a non-blank search query,
 When the user continues typing within the 300 ms debounce interval,
-Then no search request is initiated for the intermediate query values.
+Then no search request is initiated for the intermediate query values
 And the latest valid query is submitted after 300 ms without further input.
 
-### AC 10: Outdated Search Requests
-Given a search request is in progress,
-When the user enters a newer query or clears the search field,
-Then results or errors from the outdated request must not overwrite the UI state for the current query.
-
-### AC 7: Query Normalization
+## AC 7: Query Normalization
 Given the user enters a query with leading or trailing whitespace,
 When the 300 ms debounce interval elapses without further input,
 Then the trimmed query is passed to `SearchPodcastsUseCase` for searching.
 
-### AC 8: Empty Query Validation
+## AC 8: Empty Query Validation
 Given the search query is empty or contains only whitespace,
 When the query changes or the debounce interval elapses,
-Then no search request is initiated.
+Then no search request is initiated
 And the initial state is displayed when no valid query has been submitted.
 
-
-### AC 9: Clearing the Search Query
+## AC 9: Clearing the Search Query
 Given the user has entered a search query or received search results,
 When the user clears the search field,
-Then any pending debounced search is cancelled.
-And no search request is made for the empty query.
-And the initial search prompt is displayed.
+Then any pending debounced search is cancelled
+And no search request is made for the empty query
+And the initial search prompt is displayed
 And results from previous queries are no longer displayed.
+
+## AC 10: Outdated Search Requests
+Given a search request is in progress,
+When the user enters a newer query or clears the search field,
+Then results or errors from the outdated request must not overwrite the UI state for the current query.
 </acceptance-criteria>
 </ticket>
+
+---
 
 # Ticket: View Podcast Info
 <ticket>
 <title>
-Add podcast detail screen 
+Add podcast detail screen
 </title>
 <user-story>
 As a user
@@ -139,7 +139,9 @@ Create a `GetPodcastDetailsUseCase` to orchestrate retrieving show information.
 
 Add a new `PodcastDetailScreen` destination to the Jetpack Compose navigation graph backed by a `PodcastDetailScreenViewModel`, supporting navigation from the search results item click.
 
+<dependencies>
 This ticket depends on #1 having been implemented as it requires updating the existing screen to navigate when a list item is selected.
+</dependencies>
 </description>
 
 <ui-spec>
@@ -160,16 +162,11 @@ This ticket depends on #1 having been implemented as it requires updating the ex
 </ui-spec>
 
 <verification>
-1. Unit Tests: Verify `GetPodcastDetailsUseCaseTest` correctly returns data for a given podcast ID.
-2. UI Tests: Verify state transitions on `PodcastDetailScreen` (Loading -> Success, Loading -> Error).
-3. UI Tests: Confirm navigation from a search result item correctly passes the podcast identifier and opens the detail screen.
-</verification>
-
-<verification>
+# Verification
 1. Verify that `PodcastDetailScreenViewModel` exposes the correct UI state for loading, success, and error scenarios when fetching podcast metadata by ID. Use the real `GetPodcastDetailsUseCase` backed by a `FakePodcastRepository`.
 2. Verify `GetPodcastDetailsUseCaseTest` correctly returns metadata for a given podcast ID. Make use of `FakePodcastRepository` to provide test data.
 3. Verify `DefaultPodcastRepository` returns correct podcast details. Make use of `FakePodcastRemoteDataSource` to provide test data.
-4. Verify `PodcastRemoteDataSource` returns correct podcast metadata given a podcast ID. Make use of a mock http client to return mock responses to API requests for testing.
+4. Verify `PodcastRemoteDataSource` returns correct podcast metadata given a podcast ID. Make use of a mock HTTP client to return mock responses to API requests for testing.
 5. Confirm navigation from a search result item correctly passes the podcast identifier and opens the detail screen.
 </verification>
 
@@ -186,17 +183,19 @@ Given a user navigates to the podcast detail screen
 When the data is loading
 Then a circular progress loading indicator is displayed using `MaterialTheme.colorScheme.primary`
 
-## AC 2: Success state
+## AC 3: Success state
 Given a user navigates to the podcast detail screen
 When data loads successfully
 Then the podcast cover art, title, publisher, and description are displayed
 
-## AC 3: Error state
+## AC 4: Error state
 Given a user navigates to the podcast detail screen
 When a network error occurs
 Then a user-friendly error message is displayed with a retry option
 </acceptance-criteria>
 </ticket>
+
+---
 
 # Ticket: View Podcast Recent Episode List
 <ticket>
@@ -235,7 +234,7 @@ This ticket depends on the podcast detail screen metadata ticket having been imp
 1. Verify that `PodcastDetailScreenViewModel` correctly handles loading, success, and error states for the episode list. Use the real `GetEpisodeListUseCase` backed by a controllable `FakePodcastRepository`.
 2. Verify `GetEpisodeListUseCaseTest` correctly returns episode data for a given podcast ID. Make use of `FakePodcastRepository` to provide test data.
 3. Verify `DefaultPodcastRepository` returns the correct episode list for a podcast ID. Make use of `FakePodcastRemoteDataSource` to provide test data.
-4. Verify `PodcastRemoteDataSource` returns correct episode items from the API. Make use of a mock http client to return mock responses to API requests for testing.
+4. Verify `PodcastRemoteDataSource` returns correct episode items from the API. Make use of a mock HTTP client to return mock responses to API requests for testing.
 5. Confirm the episode list renders correctly below the podcast metadata section and handles its own section loading/error states.
 </verification>
 
@@ -259,7 +258,8 @@ Then a user-friendly error message is displayed with a retry option for the epis
 
 ## AC 4: Error state when podcast info fails
 Given a user is viewing a podcast detail screen
-When an error occurs requesting the episode list regardless of if the episode list is available
+When an error occurs requesting the podcast info
+And requesting the episode list is available
 Then a user-friendly error message is displayed with a retry option for the episode section
 
 ## AC 5: Error state when episode list only fails
