@@ -159,7 +159,7 @@ Describe the use cases and business logic being introduced or changed. Consider 
 
 ## Implementation Decisions
 
-A bulleted list of significant implementation decisions made in response to the requirements and considerations that affect the final design. Each prefixed with a unique identifier (example: DEC-1).  Include decisions where a alternative existed but was not selected.
+A bulleted list of significant implementation decisions made in response to the requirements and considerations that affect the final design. Each prefixed with a unique identifier (example: -1).  Include decisions where a alternative existed but was not selected.
 
 For each decision capture the choice, why it was selected and any significant trade-offs or consequences of this decision. Avoid repeating the implementation outline. Each item should be concise.
 
@@ -186,7 +186,7 @@ The range of data required for testing
 
 ## Out of Scope
 
-A numbered list describing functionality, problems or modifications that this design deliberately does not change.
+A numbered list describing functionality, edge cases, problems or modifications that this design deliberately does not change.
 
 ## Alternatives Considered
 
