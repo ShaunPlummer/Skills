@@ -61,31 +61,31 @@ The solution to the problem, from the user's perspective.
 
 ## Key considerations
 
-A numbered list of requirements and constraints on which the design should be based. For each item state why the design must take it into consideration. This section should outline inputs to the design and not include implementation decisions made in response to the constraints. These are documented later in the template.
+A bulleted list of requirements and constraints on which the design should be based. Each prefixed with a unique identifier( example: KC-1). For each item state why the design must take it into consideration. This section should outline inputs to the design and not include implementation decisions made in response to the constraints. These are documented later in the template.
 
 This section may include repository verified facts that must not be changed as part of this design.
 
 ## Assumptions
 
-A numbered list of unverified conditions the design relies on. For each assumption, include how they will be validated and what changes if they proven false.
+A bulleted list of unverified conditions the design relies on. Each prefixed with a unique identifier(example: ASM-1). For each assumption, include how they will be validated and what changes if they proven false.
 
 ## Risks
 
-A numbered list of major risks which have been identified and any mitigations which can be implemented.
+A bulleted list of  major risks which have been identified and any mitigations which can be implemented. Each prefixed with a unique identifier (example: RISK-1).
 
 ## Dependencies
 
-A numbered list dependencies. This can include external work or other development efforts.
+A bulleted list dependencies. Each prefixed with a unique identifier (example: DEP-1). This can include external work or other development efforts.
 
 ## Open Questions
 
 ### Blocking
 
-A numbered list of questions that the user must be resolved before the design can be approved.
+A bulleted list of questions that the user must be resolved before the design can be approved. Each prefixed with a unique identifier (example: Q-1).
 
 ### Non-blocking
 
-A numbered list of questions that can be resolved during planning or implementation without changing the agreed behavior.
+A bulleted list of questions that can be resolved during planning or implementation without changing the agreed behavior. Each prefixed with a unique identifier (example: Q-1).
 
 ## User Stories
 
@@ -159,7 +159,7 @@ Describe the use cases and business logic being introduced or changed. Consider 
 
 ## Implementation Decisions
 
-A numbered list of significant implementation decisions made in response to the requirements and considerations that affect the final design. Include decisions where a alternative existed but was not selected.
+A bulleted list of significant implementation decisions made in response to the requirements and considerations that affect the final design. Each prefixed with a unique identifier (example: DEC-1).  Include decisions where a alternative existed but was not selected.
 
 For each decision capture the choice, why it was selected and any significant trade-offs or consequences of this decision. Avoid repeating the implementation outline. Each item should be concise.
 
