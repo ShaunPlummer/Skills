@@ -22,28 +22,31 @@ The next step to identify how to break the development effort down into a series
 Start by identifying key architecture decisions on which the solution is being built.
 
 ## Break Down Rules
-- Each phase should deliver a small, usable increment of functionality.
+- Each ticket should deliver a small, usable increment of functionality.
 - Prefer thin vertical slices that cross the relevant application layers over horizontal, layer-by-layer work.
-- Each phase must add user value and be verifiable.
-- Keep phases small enough to integrate, review, and receive feedback quickly.
+- Each ticket must add user value and be verifiable.
+- Keep tickets small enough to integrate, review, and receive feedback quickly.
 - A single user story may span multiple tickets, with each ticket delivering  delivering a distinct subset of its acceptance criteria.
 - Never add non functional UI elements.
+- Refactoring tasks are allowed. They must not change the app functionality or user facing behaviour. They can only change implementaion details and how functionality is implemented.
 
 # 3. Write Tickets
 Review the provided 'EXAMPLE.md' to understand how individual tickets should be structured.
 
 Write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's dependencies lists the numbers/titles it depends on. Use the per-ticket 'TEMPLATE.md', one ticket per file, never a single combined file.
 
+Each ticket should include the user story and acceptance criteria is implemented. The numbering should be retained to provide traceability. 
+
 # 4. Review Task Breakdown
 
 - Compare the written tickets against the guidance in step 2 and make any improvement.
-- Check to ensure that all requirements from the specification have been included in the task breakdown.
+- Trace each in-scope requirement to a ticket containing its user story and acceptance criterion. 
+- Check implementation decisions, testing requirements are included in the relevant ticket.
 
 
 # 5. Ticket Sign off
 As the user to review the tickets and approve them. Wait for them to approve.  
 
 # 6. Upload
-Once the user has approved the tickets create the issues on GitHub, label each one as a 'enhancement'.
-
+Once the user has approved the tickets create the issues on GitHub. se the project’s issue types, labels, and field mappings where applicable.
 
