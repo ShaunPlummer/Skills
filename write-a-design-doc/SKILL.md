@@ -16,8 +16,7 @@ description: Creates a Technical Design Document grounded in the current codebas
 
 Before completing the template:
 
-- Ground the plan in the current codebase. Treat the implementation as the source of truth; verify the user's assertions and understand the
-  relevant current behavior, architecture, conventions, assumptions, and constraints.
+- Ground the plan in the current codebase. Treat the repository as the source of truth for the current implementation. Verify the user's assumptions and understand the relevant current behavior, architecture, conventions, and constraints against the project. If you identify any discrepancies, explain the differences and ask how to continue.
 - Answer repository-verifiable questions through inspection instead of asking the user.
 - Ask questions about unresolved decisions or ambiguities that prevent the template from being completed or affect the proposed solution.
 
@@ -43,6 +42,7 @@ Reconcile the conversation into a final decision set:
 
 ### Review and Revision
 
+- Compare the document against the conversation to ensure it accurately records the conversation.
 - Review all sections of the document for consistency
 - Review the document for duplicated information that can be removed. 
 
@@ -187,6 +187,10 @@ The range of data required for testing
 ## Out of Scope
 
 A numbered list describing functionality, edge cases, problems or modifications that this design deliberately does not change.
+
+## Known Limitations
+
+A numbered list of know potential detects or scenarios the proposed solition does not handle.
 
 ## Alternatives Considered
 
