@@ -94,10 +94,6 @@ commit message. Base the message only on information supported by the changes,
 the repository, or the user's stated intent. Never invent rationale, trade-offs,
 or decision history.
 
-Use at least one substantive sentence for each applicable subject. A non-trivial
-commit will typically need two or three paragraphs and roughly 80–180 words.
-Treat this as a completeness target, not a reason to add filler.
-
 Do not merely repeat what changed; that is already visible in the diff. Use
 the commit body to explain:
 - An overview of how the solution works.
@@ -106,6 +102,9 @@ the commit body to explain:
 - how the chosen approach solves that problem.
 - any important constraints, risks, or trade-offs.
 - Reference causal relationships
+
+Explain the changes in a way they make sense to someone reviewing the change 
+for the first time and doesn't already have context for what is being updated and why. 
 
 When alternatives were seriously considered, briefly explain why the chosen
 approach was preferred. Do not invent alternatives or decision history when
